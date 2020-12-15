@@ -1,0 +1,51 @@
+</main>
+<div class="row"></div>
+<div class="modal transparent z-depth-0 noPrint" id="modalajaxloader" tabindex="-1">
+	<div class="modal-content">
+		<div class="center-align">
+			<img id="modalajaximg" src="resources/images/ajax-loader.gif">
+		</div>
+	</div>
+</div>
+<footer class="noPrint page-footer black">
+		<div class="row">
+			<div class="col l1 s2 brand-logo-footer">
+			  <img class="left" src="resources/images/logo.png" width="85" height="auto">
+			</div>						
+			<div class="col l11 s10 center divfooter">
+				<p class="grey-text">
+					${pageTitle}. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					${pageEmail} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ${pageFone} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+					${pageMSG}.
+				</p>						
+			</div>
+			<div class="col l12 s12 center divfooter">
+				<p class="grey-text">
+					&copy; 2013-2018. A SAGCL system by <a href="javascript:void(0)">Francisco
+						Costa - IT Analyst</a>. &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &#64;
+					Webmaster: fcocosta31@	gmail.com &nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp; Powered by <a href="http://materializecss.com">Materializecss &copy; All Rights Reserved</a>.
+				</p>
+			</div>
+		</div>
+</footer>
+
+<!-- IMPORTS OF JS SCRIPTS -->
+<script type="text/javascript" src="resources/js/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script type="text/javascript" src="resources/materialize_0.100.2/js/materialize.js"></script>
+<script type="text/javascript" src="resources/js/jquery.materialize-autocomplete.js"></script>
+<script type="text/javascript" src="resources/js/jquery.bootpag.min.js"></script>
+<script type="text/javascript" src="resources/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="resources/js/dataTables.material.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.validate.js"></script>
+<script type="text/javascript" src="resources/js/jquery.maskedinput.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.loadJSON.js"></script>
+<script type="text/javascript" src="resources/js/jquery.fileDownload.js"></script>
+<script type="text/javascript" src="resources/js/jquery.caret.js"></script>
+<script src="resources/js/mbox.js"></script>
+<script type="text/javascript" src="resources/js/myscripts.js"></script>
+
+</body>
+</html>

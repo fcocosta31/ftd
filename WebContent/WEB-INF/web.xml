@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>ftd</display-name>
+  <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <include-prelude>/prelude.jspf</include-prelude>
+      <include-coda>/coda.jspf</include-coda>
+    </jsp-property-group>
+  </jsp-config>
+  <servlet>
+    <description></description>
+    <display-name>ControlServlet</display-name>
+    <servlet-name>ControlServlet</servlet-name>
+    <servlet-class>br.ftd.control.ControlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControlServlet</servlet-name>
+    <url-pattern>/ControlServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
