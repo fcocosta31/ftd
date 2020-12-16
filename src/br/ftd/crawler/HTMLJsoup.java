@@ -95,13 +95,16 @@ public class HTMLJsoup {
 		doc = sendRequest(html);//con.timeout(5*1000).get();
 		body = doc.body().children();				 
 		elements = body.select(Parametros.TAGNoticias);
-		links = elements.select("div.items-row");
+		links = elements.select("article.elementor-post");
 		for(Element i : links){
 			abrelivros = new Abrelivros();
 			abrelivros.setA_href(i.select("a[href").first().absUrl("href"));
 			abrelivros.setA_text(i.select("a[href").first().text());
 			abrelivros.setP_text(i.select("p").text());
-			abrelivros.setDd_text(i.select("dd[class=published]").text());
+			String author_post = i.select("div.elementor-post__meta-data > span.elementor-post-author").text();
+			String data_post = i.select("div.elementor-post__meta-data > span.elementor-post-date").text();
+			abrelivros.setDd_text(data_post);
+			abrelivros.setAuthor(author_post);
 			objs.add(abrelivros);
 		}
 		 

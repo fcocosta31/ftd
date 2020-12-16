@@ -21,9 +21,9 @@ public class ConnectionFactory {
 	private static ConnectionFactory connectionFactory;
 	private static String driver = "jdbc:mysql://localhost:3306/";
 	private static String database = "bdftdrp?useUnicode=yes";
-	private static String user = "chicoh";
-	//private static String password = "4ybZwnwIONVR";
-	private static String password = "chc1234";
+	private static String user = "root";
+	private static String password = "4ybZwnwIONVR";
+	//private static String password = "chc1234";
 	private static String sqlDbClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 			//"net.sourceforge.jtds.jdbc.Driver";
 							//"net.sourceforge.jtds.jdbc.Driver";

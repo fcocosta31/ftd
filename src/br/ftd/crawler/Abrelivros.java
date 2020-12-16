@@ -5,6 +5,7 @@ public class Abrelivros {
 	private String a_text;
 	private String p_text;
 	private String dd_text;
+	private String author;
 	public String getA_href() {
 		return a_href;
 	}
@@ -32,5 +33,11 @@ public class Abrelivros {
 	
 	public String toString() {
 		return "Link: "+a_href+" - Titulo: "+a_text+" - Texto: "+p_text;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }

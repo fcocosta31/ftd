@@ -70,10 +70,10 @@
 				
 				<c:set var="itens" value="${fn:length(pedcliente.itens)}" />
 				<div class="row">
-					<div class="col s12 bordered">
-						<table style="font-size: 7pt">
+					<div>
+						<table style="font-size: 8pt" border="1" cellspacing="0px" cellpadding="1px">
 
-							<tr class="border_bottom" style="color: white; background-color: #5599FF">
+							<tr class="row" style="color: white; background-color: #5599FF">
 								<th>Código</th>
 								<th style="text-align: center">Qt.Pedida</th>
 								<th width="400px">Descrição</th>
@@ -83,12 +83,18 @@
 							</tr>
 
 							<c:forEach var="pd" items="${pedcliente.itens}">
-								<tr class="border_bottom" style="font-size: 9pt">
+								<tr class="row" style="font-size: 11pt">
 									<td>${pd.item.codigo}</td>
 									<td style="text-align: center; font-size: 11pt">${pd.qtdpedida}</td>
 									<td width="400px">${pd.item.descricao}</td>
-									<td style="text-align: center">${pd.qtdatendida}</td>
-									<td style="text-align: center; font-size: 10pt">${pd.qtdpendente}</td>
+									<td style="text-align: center">
+										<c:if test="${pd.qtdatendida > 0}">
+											${pd.qtdatendida}
+										</c:if>
+									</td>
+									<td style="text-align: center; font-size: 11pt">
+											${pd.qtdpendente}
+									</td>
 									<td style="text-align: center"><c:choose>
 											<c:when test="${!empty usuariologado}">
 											${pd.item.estoque}
@@ -100,7 +106,7 @@
 								</tr>
 
 							</c:forEach>
-							<tr class="rows">
+							<tr class="row">
 								<td style="text-align: center; font-weight: bold;">Totais</td>
 								<td style="text-align: center; font-weight: bold;">${pedcliente.qtdtotal}</td>
 								<td style="text-align: center; font-weight: bold;">${itens}
@@ -110,7 +116,7 @@
 								<td></td>
 							</tr>
 
-							<tr class="border_bottom">
+							<tr>
 								<td colspan="8"></td>
 							</tr>
 

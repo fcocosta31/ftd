@@ -1585,7 +1585,7 @@ public class ControlServlet extends HttpServlet {
 				soup = new HTMLJsoup();
 				ls = soup.getCarrouselFTD("https://ftd.com.br/index.php");
 				Thread.sleep(500);
-				lsab = soup.getNoticiasAbrelivros("http://www.abrelivros.org.br/home/index.php");
+				lsab = soup.getNoticiasAbrelivros("https://abrelivros.org.br/site/");
 				Thread.sleep(500);
 				//lsmc = soup.getCarrouselMEC("http://portal.mec.gov.br/index.php");
 				//Thread.sleep(500);
@@ -1599,7 +1599,7 @@ public class ControlServlet extends HttpServlet {
 				soup = new HTMLJsoup();
 				ls = soup.getCarrouselFTD("https://ftd.com.br/index.php");
 				Thread.sleep(500);
-				lsab = soup.getNoticiasAbrelivros("http://www.abrelivros.org.br/home/index.php");
+				lsab = soup.getNoticiasAbrelivros("https://abrelivros.org.br/site/");
 				Thread.sleep(500);
 				//lsmc = soup.getCarrouselMEC("http://portal.mec.gov.br");
 				//Thread.sleep(500);

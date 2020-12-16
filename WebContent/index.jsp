@@ -99,19 +99,47 @@
 
 <!-- INÍCIO DAS NOTÍCIAS -->
 <div class="row">
-
-	<c:forEach begin="0" end="4" var="ab" items="${abrelivros}">
-		<div class="col s12">
-			<h4>
-				<a href="${ab.a_href}">${ab.a_text}</a>
-			</h4>
-			<p style="text-align: justify;">
-				<span style="font-size: 12pt;">${ab.p_text} <span
-					style="font-size: 10pt"><br>${ab.dd_text} [fonte:
-						www.abrelivros.org.br]</span></span>
-			</p>
-		</div>
-	</c:forEach>				
+	
+<table>	
+	<tbody>
+			<c:forEach var="ab" items="${abrelivros}" varStatus="loopCounter">
+			<c:if test="${loopCounter.count % 2 != 0 }">
+				<tr>
+			</c:if>
+			  
+				<td class="col s6">
+					
+					<div>
+					
+					<h4 class="indigo-text darken-4">
+						${ab.a_text}
+					</h4>
+					<div>
+					<span class="#eceff1 blue-grey lighten-5">
+						${ab.author}
+					</span>
+					<span class="#eceff1 blue-grey lighten-5">
+						${ab.dd_text}
+					</span>
+					<div>
+						<p>${ab.p_text}</p>
+					</div>
+					<a href="${ab.a_href}">LEIA MAIS »
+					</a>
+					<span style="font-size: 10pt"><br>[fonte:
+								www.abrelivros.org.br]</span>
+					
+					</div>
+					</div>
+					
+				</td>
+			<c:if test="${loopCounter.count % 2 == 0 }">				
+				</tr>
+			</c:if>	
+	</c:forEach>
+	</tbody>	
+</table>
+				
 </div>
 <!-- FIM DAS NOTÍCIAS -->
 
