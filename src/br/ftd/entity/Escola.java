@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ftd.model.FTDProperties;
+
 
 public class Escola {
 	
@@ -56,8 +58,8 @@ public class Escola {
 	private double lat = 0;
 	private int user_id;
 	private Auditoria audit;
-	private static final String apikey = "AIzaSyD5Bf7YSv0IlZjMwR1-rjiNAne9KkqtoZk"; 
-	private static final String urlapi = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+	private static final String apikey = new FTDProperties().getApikey(); 
+	private static final String urlapi = new FTDProperties().getUrlapi();
 	
 	public Escola(){
 		idftd = 0;

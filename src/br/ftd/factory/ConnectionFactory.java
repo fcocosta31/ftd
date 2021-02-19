@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import br.ftd.entity.Params;
 import br.ftd.model.DAOParams;
+import br.ftd.model.FTDProperties;
 
 
 
@@ -20,13 +21,7 @@ public class ConnectionFactory {
 	private static Connection con;
 	private static ConnectionFactory connectionFactory;
 	private static String driver = "jdbc:mysql://localhost:3306/";
-	private static String database = "bdftdrp?useUnicode=yes";
-	private static String user = "root"; //chicoh ou root
-	private static String password = "4ybZwnwIONVR";
-	//private static String password = "chc1234";
 	private static String sqlDbClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-			//"net.sourceforge.jtds.jdbc.Driver";
-							//"net.sourceforge.jtds.jdbc.Driver";
 	
 	public ConnectionFactory(){};
 	
@@ -34,15 +29,16 @@ public class ConnectionFactory {
 	public Connection getMySqlConnection(){
 		
 		try {
-
+			
+			FTDProperties props = new FTDProperties();
 			Properties p = new Properties();
-			p.setProperty("user", user);
-			p.setProperty("password", password);
+			p.setProperty("user", props.getDbuser());
+			p.setProperty("password", props.getDbpass());
 			p.setProperty("MaxPooledStatements", "500");
 			
 			//+"?useTimezone=true&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"
 			Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-			con = DriverManager.getConnection(driver+database, p);
+			con = DriverManager.getConnection(driver+props.getDbname(), p);
 						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
