@@ -109,7 +109,7 @@ public class JavaMailApp2 {
 	}
 	
 	private boolean isValidEmail(String email) {
-		boolean isValid = false;
+		boolean isValid = true;
 		try {
 			
 			if(email.indexOf(",") > -1) {
@@ -118,17 +118,16 @@ public class JavaMailApp2 {
 					for (String ml : mails) {
 						InternetAddress internetAddress = new InternetAddress(ml);
 						internetAddress.validate();
-						isValid = true;
 					}
 				}
 			}else {
 				InternetAddress internetAddress = new InternetAddress(email);
 				internetAddress.validate();
-				isValid = true;				
 			}
 			
 		}catch(AddressException e) {
 			System.out.println(">>>>>>>>>>>> ::::::::::: Email inválido: "+email);
+			isValid = false;
 		}
 		
 		return isValid;
@@ -431,6 +430,7 @@ public class JavaMailApp2 {
 	@SuppressWarnings("unused")
 	public String sendMailPedido(PedCliente pedido, String nome, String cnpj, String formapgto, String transp, String obs, Usuario usuario){		
 		
+		String resposta = "Pedido nº "+pedido.getIdpedido()+" gerado com sucesso!";
 		
 	    NumberFormat formatter = NumberFormat.getCurrencyInstance();
 	    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -440,6 +440,8 @@ public class JavaMailApp2 {
 	    
 	    if(this.isValidEmail(mailcliente)) {
 	    	destinatarios = mailcliente+","+mailsender;
+	    }else {
+	    	resposta += " [Obs.: o e-mail: "+mailcliente+" não é válido]";
 	    }
 	    
 	    session = Session.getInstance(props,
@@ -518,7 +520,7 @@ public class JavaMailApp2 {
 	          
 	          this.asyncMail(event);
 
-	          return "Pedido nº "+pedido.getIdpedido()+" gerado com sucesso!";
+	          return resposta;
 	     } catch (MessagingException e) {
 	          return e.getMessage();
 	    }	    

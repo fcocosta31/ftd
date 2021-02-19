@@ -71,9 +71,9 @@
 				<c:set var="itens" value="${fn:length(pedcliente.itens)}" />
 				<div class="row">
 					<div>
-						<table style="font-size: 8pt" border="1" cellspacing="0px" cellpadding="1px">
+						<table style="font-size: 8pt;" border="1" cellspacing="0" cellpadding="1">
 
-							<tr class="row" style="color: white; background-color: #5599FF">
+							<tr class="row">
 								<th>Código</th>
 								<th style="text-align: center">Qt.Pedida</th>
 								<th width="400px">Descrição</th>
@@ -83,7 +83,7 @@
 							</tr>
 
 							<c:forEach var="pd" items="${pedcliente.itens}">
-								<tr class="row" style="font-size: 11pt">
+								<tr class="row" style="font-size: 11pt;">
 									<td>${pd.item.codigo}</td>
 									<td style="text-align: center; font-size: 11pt">${pd.qtdpedida}</td>
 									<td width="400px">${pd.item.descricao}</td>

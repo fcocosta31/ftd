@@ -21,7 +21,7 @@ public class ConnectionFactory {
 	private static ConnectionFactory connectionFactory;
 	private static String driver = "jdbc:mysql://localhost:3306/";
 	private static String database = "bdftdrp?useUnicode=yes";
-	private static String user = "root";
+	private static String user = "root"; //chicoh ou root
 	private static String password = "4ybZwnwIONVR";
 	//private static String password = "chc1234";
 	private static String sqlDbClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -41,7 +41,7 @@ public class ConnectionFactory {
 			p.setProperty("MaxPooledStatements", "500");
 			
 			//+"?useTimezone=true&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"
-			Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
 			con = DriverManager.getConnection(driver+database, p);
 						
 		} catch (SQLException e) {

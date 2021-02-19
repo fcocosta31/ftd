@@ -6,6 +6,24 @@ $(document).ready(function(){
 	
 	$('.select-with-search').select2({width: "100%"});
 	
+	$("#btn_enviar_pedido").click(function(){
+		nr_pedido = $("#txtpedido").val();
+		inicio = $("#dataini").val();
+		fim = $("#datafim").val();
+		if (nr_pedido === ''){
+			console.log("+++++ ===> sem numero de pedido++++");
+			if(inicio === ''){
+				mbox.alert("Preencha o campo Data Inicial!!");
+			}else if(fim === ''){
+				mbox.alert("Preencha o campo Data Final!!");
+			}else{
+				$("#formpedidodata").submit();
+			}
+		}else{
+			$("#formpedidodata").submit();
+		}
+	});
+	
 });
 </script>
 
@@ -55,7 +73,9 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div class="col l6 m6 s12 right-align">
-				<button class="btn waves-effect waves-light blue" type="submit">Enviar</button>
+				<button class="btn waves-effect waves-light blue" type="button" id="btn_enviar_pedido">
+					Enviar
+				</button>
 			</div>		
 		</div>
 			

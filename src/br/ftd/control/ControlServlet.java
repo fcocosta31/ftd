@@ -1070,7 +1070,7 @@ public class ControlServlet extends HttpServlet {
 		Date fim = convertStringToDate(datafim);
 		
 		response.setContentType("application/vnd.ms-excel");
-    	response.setHeader("Content-Disposition", "attachment; filename=pendencias-"+inicio+"_a_"+fim+".xls");
+    	response.setHeader("Content-Disposition", "attachment; filename=pendencias-"+codigoftd+"-"+inicio+"_a_"+fim+".xls");
     	response.setHeader("Set-Cookie", "fileDownload=true; path=/");
     	
     	ServletContext context = request.getServletContext();
@@ -1079,7 +1079,7 @@ public class ControlServlet extends HttpServlet {
     	    	
 		String templatePath = realPath + "/resources/xls/pedclientePendenteTemplate.xls";
 		
-		if(tipo.equalsIgnoreCase("resumido") && codigoftd.equalsIgnoreCase("todos")) {
+		if(tipo.equalsIgnoreCase("resumido")) {
 			templatePath = realPath + "/resources/xls/pedclientePendenteSinteticoTemplate.xls";
 		}
 		
@@ -1093,6 +1093,7 @@ public class ControlServlet extends HttpServlet {
 		beans.put("lp", lista);
 		beans.put("datainicial", inicio);
 		beans.put("datafinal", fim);
+		beans.put("codigoftd", codigoftd);
 		
 		XLSTransformer transformer = new XLSTransformer();
 				

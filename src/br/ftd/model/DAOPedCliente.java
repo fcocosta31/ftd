@@ -129,7 +129,7 @@ public class DAOPedCliente {
 				pstmb = con.prepareStatement(sql);
 				pstmb.setString(1, pedido.getCliente().getRazaosocial());
 				pstmb.setString(2, pedido.getCliente().getCodigoftd());
-				pstmb.executeQuery();
+				pstmb.executeUpdate();
 			}
 			con.commit();
 			con.setAutoCommit(true);
@@ -918,15 +918,30 @@ public class DAOPedCliente {
 				+ " and emissao between ? and ?) b on a.codigo = b.codigo";
 
 
-		String sql1 = "select b.idpedido, b.codigoftd, b.nomeftd, b.emissao, a.familia, a.nivel, b.codigo,"
-				+ " a.descricao, b.qtdpedida, b.qtdatd, b.qtdpend from produto a inner join (select a.idpedido,"
-				+ " codigoftd, nomeftd, emissao, b.codigo, b.qtdpedida, b.qtdatd, b.qtdpend from pedcliente a inner"
-				+ " join (select a.idpedido, a.codigo, qtdpedida, qtdatd, (qtdpedida - qtdatd) as qtdpend from"
-				+ " item_pedcliente a inner join (select idpedido, codigo, sum(qtdatendida) as qtdatd from item_pedcliente_atendido"
-				+ " group by idpedido, codigo) b on a.idpedido = b.idpedido and a.guardarpendencia = 0"
-				+ " and a.codigo = b.codigo where (qtdpedida - qtdatd) > 0)"
-				+ " b on a.idpedido = b.idpedido and emissao between ? and ? and codigoftd = ?)"
-				+ " b on a.codigo = b.codigo;";
+		String sql1 = "select familia, nivel, codigo,"
+				+ " descricao, sum(qtdpedida) as qtdpedida, sum(qtdatd) as qtdatd, sum(qtdpend) as qtdpend from"
+				+ " (select b.idpedido, b.codigoftd, b.nomeftd, b.emissao, a.familia, a.nivel, b.codigo,"
+				+ " a.descricao, b.qtdpedida, b.qtdatd, b.qtdpend from produto a inner join"
+				+ " (select a.idpedido, codigoftd, nomeftd, emissao, b.codigo, b.qtdpedida, b.qtdatd,"
+				+ " b.qtdpend from pedcliente a inner join (select a.idpedido, a.codigo, qtdpedida,"
+				+ " qtdatd, (qtdpedida - qtdatd) as qtdpend from item_pedcliente a inner join (select"
+				+ " idpedido, codigo, sum(qtdatendida) as qtdatd from item_pedcliente_atendido group"
+				+ " by idpedido, codigo) b on a.idpedido = b.idpedido and a.codigo = b.codigo where"
+				+ " (qtdpedida - qtdatd) > 0) b on a.idpedido = b.idpedido and a.guardarpendencia = 0"
+				+ " and emissao between ? and ? and codigoftd = ?) b on a.codigo = b.codigo) as w"
+				+ " group by familia, nivel, codigo, descricao"
+				+ " order by familia, nivel, descricao";
+
+		String sql2 = "select b.idpedido, b.codigoftd, b.nomeftd, b.emissao, a.familia, a.nivel, b.codigo,"
+				+ " a.descricao, b.qtdpedida, b.qtdatd, b.qtdpend from produto a inner join"
+				+ " (select a.idpedido, codigoftd, nomeftd, emissao, b.codigo, b.qtdpedida, b.qtdatd,"
+				+ " b.qtdpend from pedcliente a inner join (select a.idpedido, a.codigo, qtdpedida,"
+				+ " qtdatd, (qtdpedida - qtdatd) as qtdpend from item_pedcliente a inner join (select"
+				+ " idpedido, codigo, sum(qtdatendida) as qtdatd from item_pedcliente_atendido group"
+				+ " by idpedido, codigo) b on a.idpedido = b.idpedido and a.codigo = b.codigo where"
+				+ " (qtdpedida - qtdatd) > 0) b on a.idpedido = b.idpedido and a.guardarpendencia = 0"
+				+ " and emissao between ? and ? and codigoftd = ?) b on a.codigo = b.codigo";
+
 		
 		PreparedStatement pstm;
 		ResultSet rs;
@@ -939,8 +954,13 @@ public class DAOPedCliente {
 					pstm = con.prepareStatement(sql0);
 					pstm.setDate(1, inicio);
 					pstm.setDate(2, fim);
-			}else{
+			}else if(!codigoftd.equalsIgnoreCase("todos") && tipo.equalsIgnoreCase("resumido")) {
 				pstm = con.prepareStatement(sql1);
+				pstm.setDate(1, inicio);
+				pstm.setDate(2, fim);
+				pstm.setString(3, codigoftd);				
+			}else{
+				pstm = con.prepareStatement(sql2);
 				pstm.setDate(1, inicio);
 				pstm.setDate(2, fim);
 				pstm.setString(3, codigoftd);
@@ -950,18 +970,13 @@ public class DAOPedCliente {
 			while(rs.next()){
 				ItemPedCliente item = new ItemPedCliente();
 				Produto p = new Produto();
-				if(tipo.equalsIgnoreCase("resumido")) {
-					if(!codigoftd.equalsIgnoreCase("todos")) {	
-						item.setIdpedido(rs.getInt("idpedido"));
-						item.setCodigoftd(rs.getString("codigoftd"));
-						item.setNomeftd(rs.getString("nomeftd"));
-						item.setEmissao(rs.getDate("emissao"));
-					}
-				}else {
+				if(tipo.equalsIgnoreCase("detalhado")) {
+
 					item.setIdpedido(rs.getInt("idpedido"));
 					item.setCodigoftd(rs.getString("codigoftd"));
 					item.setNomeftd(rs.getString("nomeftd"));
 					item.setEmissao(rs.getDate("emissao"));					
+
 				}
 				p.setCodigo(rs.getString("codigo"));
 				p.setDescricao(rs.getString("descricao"));
