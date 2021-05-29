@@ -158,7 +158,7 @@ public class DAOEmpresa {
 					ResultSet rs = stm.executeQuery(sql);
 					if(rs.next()){
 						usuario = new Usuario();
-						usuario.setId(99);
+						usuario.setId(999999);
 						usuario.setCodigoftdempresa(rs.getString("A1_COD"));
 						usuario.setNome(rs.getString("A1_NOME").trim());
 						usuario.setEmail(rs.getString("A1_EMAIL").trim());
@@ -178,7 +178,6 @@ public class DAOEmpresa {
 		}
 		return usuario;
 	}
-	
 	
 	public static void getDadosEmpresa(Empresa empresa){
 		Connection con = ConnectionFactory.getInstance().getSqlConnection();

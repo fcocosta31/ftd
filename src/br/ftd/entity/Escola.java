@@ -58,8 +58,8 @@ public class Escola {
 	private double lat = 0;
 	private int user_id;
 	private Auditoria audit;
-	private static final String apikey = new FTDProperties().getApikey(); 
-	private static final String urlapi = new FTDProperties().getUrlapi();
+	private static final String apikey = FTDProperties.getInstance().getApikey(); 
+	private static final String urlapi = FTDProperties.getInstance().getUrlapi();
 	
 	public Escola(){
 		idftd = 0;

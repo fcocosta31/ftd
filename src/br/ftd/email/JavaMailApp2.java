@@ -428,7 +428,7 @@ public class JavaMailApp2 {
 	
 	
 	@SuppressWarnings("unused")
-	public String sendMailPedido(PedCliente pedido, String nome, String cnpj, String formapgto, String transp, String obs, Usuario usuario){		
+	public String sendMailPedido(PedCliente pedido, String formapgto, String transp, String obs, Usuario usuario){		
 		
 		String resposta = "Pedido nº "+pedido.getIdpedido()+" gerado com sucesso!";
 		
@@ -469,7 +469,7 @@ public class JavaMailApp2 {
 	          		+ "<h3>Pedido nº:"+pedido.getIdpedido()+"</h3>");
 	          ms.append("Data: "+pedido.getEmissao()+"<br/>");
 	          ms.append("Cliente: "+pedido.getCliente().getRazaosocial()+"<br/>");
-	          ms.append("CNPJ: "+cnpj+"<br/>");
+	          ms.append("CNPJ: "+pedido.getCliente().getCnpj()+"<br/>");
 	          ms.append("Endereço: "+pedido.getCliente().getEndereco()+" / "+pedido.getCliente().getMunicipio()+"-"+pedido.getCliente().getUf()+"<br/>");
 	          ms.append("Status: "+pedido.getSituacao()+"<br/>");
 	          ms.append("Telefone de Contato: "+formapgto+"<br/>");

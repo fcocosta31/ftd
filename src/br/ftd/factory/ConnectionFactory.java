@@ -29,8 +29,7 @@ public class ConnectionFactory {
 	public Connection getMySqlConnection(){
 		
 		try {
-			
-			FTDProperties props = new FTDProperties();
+			FTDProperties props = FTDProperties.getInstance();
 			Properties p = new Properties();
 			p.setProperty("user", props.getDbuser());
 			p.setProperty("password", props.getDbpass());

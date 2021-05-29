@@ -13,13 +13,16 @@
 	$(document).on("click",'#btnConfirmaPedidoEmail', function(){
 		
 		var idempresa = $("#txtidempresa").val();
+		var nomec = $("#txtnomec").val();
+		var fonecontato = $("#txtfonecontato").val();
+		var transporte = $("#txttransportadora").val();
+		var observ = $("#txtobsc").val();
 		
 		if(idempresa == ''){
 			document.getElementById("diverrorname").innerHTML = '<p  style="color: red; font-size: 10pt; padding: 0;">Cliente inválido. Pesquise novamente!</p>';
 		}else{
 			$("#modalSendPedidoMail").modal("close");
-			enviarEmailPedidoOrcam($("#txtnomec").val(), $("#txtidempresa").val(),
-					$("#txtfonecontato").val(), $("#txttransportadora").val(), $("#txtobsc").val());			
+			enviarEmailPedidoOrcam(nomec, idempresa, fonecontato, transporte, observ);			
 		}
 		
 	});

@@ -6,11 +6,19 @@ import java.util.Properties;
 import java.io.InputStream;
 
 public class FTDProperties {
+	
 	private String dbname;
 	private String dbuser;
 	private String dbpass;
 	private String apikey;
 	private String urlapi;
+	
+	public static FTDProperties ftdProperties;
+	
+	public static FTDProperties getInstance() {
+		ftdProperties = new FTDProperties();
+		return ftdProperties;
+	}
 	
 	public FTDProperties() {
 		

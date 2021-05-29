@@ -41,6 +41,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.axis2.databinding.types.soapencoding.Array;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.w3c.dom.DOMException;
@@ -679,8 +680,11 @@ public class ControlServlet extends HttpServlet {
 		if(session == null){
 			session = request.getSession(true);
 		}
+		Usuario user = (Usuario) session.getAttribute("usuariologado");
 
+		
 		PedCliente pedido = (PedCliente) session.getAttribute("pedcliente");
+		String clienteantigo = "["+pedido.getCliente().getCodigoftd()+"] - "+pedido.getCliente().getRazaosocial();
 		Empresa cliente = new Empresa();
 		cliente.setCodigoftd(request.getParameter("_idempresa"));
 		DAOEmpresa.getDadosEmpresa(cliente);
@@ -689,6 +693,7 @@ public class ControlServlet extends HttpServlet {
 		session.setAttribute("pedcliente", pedido);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
+		
 		Gson gson = new Gson();
 		String jsonObject = gson.toJson(mensagem);
 		response.getWriter().write(jsonObject);														
@@ -1309,9 +1314,7 @@ public class ControlServlet extends HttpServlet {
 		
 		//String realPath = getServletContext().getRealPath("");
 		
-		String nome = request.getParameter("txtnome");
 		String codigoftd = request.getParameter("txtidempresa");
-		String cnpj = "..";
 		String formapgto = request.getParameter("txtfonecontato");
 		String transportadora = request.getParameter("txttransportadora");
 		String obs = request.getParameter("txtobs");		
@@ -1319,20 +1322,30 @@ public class ControlServlet extends HttpServlet {
 		PedCliente pedido = new PedCliente();
 		
 		Empresa cliente = new Empresa();
-		cliente.setCodigoftd(codigoftd);
+		
+		if(usuario.getCargo() == 4) {
+			cliente.setCodigoftd(usuario.getCodigoftdempresa());
+		}else {
+			cliente.setCodigoftd(codigoftd);
+		}
+		
 		DAOEmpresa.getDadosEmpresa(cliente);
+
+		
+		if(usuario.getCargo() == 4) {
+			cliente.setRazaosocial(usuario.getNome());
+			cliente.setCnpj(usuario.getCnpj());
+		}
+		
 		pedido.setCliente(cliente);
 		pedido.setUsuario(usuario);
-		if(usuario.getCargo() == 4) {
-			cnpj = usuario.getCnpj();
-		}else {
-			cnpj = pedido.getCliente().getCnpj();
-		}
+		
 		boolean flag = false;
 		
 		String mensagem = "Orcamento sem itens! Favor, selecione os itens e quantidades para envio!!!";
 		
 		if(orcam != null) {
+			
 			for(ItemOrcamento i : orcam.getItens()){
 				ItemPedCliente ip = new ItemPedCliente();
 				DAOProduto.setPrevisaoProduto(i.getProduto());
@@ -1363,11 +1376,18 @@ public class ControlServlet extends HttpServlet {
 			pedido.setUser_id(usuario.getId());
 					
 			pedido.refazSituacao("0");
-					
-			DAOPedCliente.salvar(pedido);
+			
+		    System.out.println(":::::::::::::::::: IMPLANTANDO PEDIDO :::::::::::::::::::::::::::");
+		    System.out.println(":::::::::::::::::: Usuário logado: "+usuario.getNome());
+		    System.out.println(":::::::::::::::::: Cliente: ["+pedido.getCliente().getCodigoftd()+"] "
+		    		+ ""+pedido.getCliente().getRazaosocial());
+		    DAOPedCliente.salvar(pedido);
+		    System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
 	
 			JavaMailApp2 mail = new JavaMailApp2();
-			mensagem = mail.sendMailPedido(pedido, nome, cnpj, formapgto, transportadora, obs, usuario);
+			
+			mensagem = mail.sendMailPedido(pedido, formapgto, transportadora, obs, usuario);
+			
 		}
 		
 		Gson gson = new Gson();
@@ -3025,6 +3045,8 @@ public class ControlServlet extends HttpServlet {
 			}
 									
 		   System.out.println(":::::::::::::::::: IMPLANTANDO PEDIDO :::::::::::::::::::::::::::");
+		   System.out.println(":::::::::::::::::: Cliente: ["+pedido.getCliente().getCodigoftd()+"] "
+		    		+ ""+pedido.getCliente().getRazaosocial());		   
 		   System.out.println(":::::::::::::::::: Usuário logado: "+usuario.getNome());		   
 		   mensagem = DAOPedCliente.salvar(pedido);
 		   System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::");
@@ -6053,7 +6075,7 @@ public class ControlServlet extends HttpServlet {
 				if(!(usuarioLogado == null)) {
 					session.setAttribute("usuariologado", usuarioLogado);
 					session.setAttribute("nomeusuario", usuarioLogado.getNome());
-					mensagem = "ok";				
+					mensagem = "ok";
 				}
 			}
 		}
