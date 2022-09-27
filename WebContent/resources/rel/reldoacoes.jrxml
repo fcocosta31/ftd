@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reldoacoes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c3b24f44-c77b-48a8-8769-9ac4c6fc9116">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="">
+		<![CDATA[]]>
+	</queryString>
+	<field name="emissao" class="java.sql.Date">
+		<fieldDescription><![CDATA[emissao]]></fieldDescription>
+	</field>
+	<field name="escola" class="java.lang.String">
+		<fieldDescription><![CDATA[escola]]></fieldDescription>
+	</field>
+	<field name="iddoacao" class="java.lang.Integer">
+		<fieldDescription><![CDATA[iddoacao]]></fieldDescription>
+	</field>
+	<field name="professor" class="java.lang.String">
+		<fieldDescription><![CDATA[professor]]></fieldDescription>
+	</field>
+	<field name="qtde" class="java.lang.Integer">
+		<fieldDescription><![CDATA[qtde]]></fieldDescription>
+	</field>
+	<field name="vendedor" class="java.lang.String">
+		<fieldDescription><![CDATA[vendedor]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="298" height="33" uuid="96917de7-072d-4a2d-a918-21313dab8791"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Doações]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="5c074d82-2c24-4e9b-8971-c9f985568748"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="29" height="20" uuid="e8e96de9-b396-441b-946c-759d47d45cf0"/>
+				<text><![CDATA[Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="2" width="55" height="20" uuid="5d8d4b51-49bd-4f63-acbe-064d50bee368"/>
+				<text><![CDATA[Emissao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="96" y="2" width="128" height="20" uuid="498d2967-5e81-4640-91fb-bb45ec42bd69"/>
+				<text><![CDATA[Professor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="2" width="188" height="20" uuid="7941bf05-b6a1-493c-bec7-db376e3e36e6"/>
+				<text><![CDATA[Escola]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="2" width="65" height="20" uuid="50c6b2e9-1a5b-42c0-bf1b-367ca2d6df55"/>
+				<text><![CDATA[Vendedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="498" y="2" width="55" height="20" uuid="93cb7cff-758a-4b50-9b1f-7c824d5f7767"/>
+				<text><![CDATA[Qtde]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="22c6ebad-fd4e-4334-a763-10c1d44ad52d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="29" height="15" uuid="465a9396-c9cc-4e2a-823d-3741f06d684a"/>
+				<textFieldExpression><![CDATA[$F{iddoacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="55" height="15" uuid="cbcda00d-ef35-45bb-8d02-8d99549d5598"/>
+				<textFieldExpression><![CDATA[$F{emissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="0" width="128" height="15" uuid="044a6216-a43f-4b7e-955b-9543aeecb463"/>
+				<textFieldExpression><![CDATA[$F{professor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="0" width="188" height="15" uuid="b7f134d8-3589-45cb-ad24-09bb297fe7b7"/>
+				<textFieldExpression><![CDATA[$F{escola}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="0" width="65" height="15" uuid="6cdc702f-bcb5-415c-a1d3-71e9b0793c21"/>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="498" y="0" width="55" height="15" uuid="2dc4b64a-e21b-4e4b-b569-b726e148a4c3"/>
+				<textFieldExpression><![CDATA[$F{qtde}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="db2e1091-125b-422c-ba7f-d4c78875b548"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="724ec862-481f-4942-9f23-4867a1281432"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="159125e9-e3b1-4d91-8d83-8590c33633de"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="68302fb2-0c13-46a5-a255-0f4aeda6508f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
